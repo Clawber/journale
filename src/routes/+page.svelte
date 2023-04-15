@@ -2,6 +2,30 @@
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
+
+	let TodoText = "yellow"
+
+
+	const saveTodo = (e) => {
+		// save todo text
+		TodoText = "d lsfkjsdlkfj dslksf"
+	}
+
+	function onKeyDown(e) {
+		if (e.key === "Tab") {
+			
+			e.preventDefault();
+			const textarea = e.target;
+      const selectionStart = textarea.selectionStart;
+      const selectionEnd = textarea.selectionEnd;
+      const value = textarea.value;
+      const newValue = value.substring(0, selectionStart) + '\t' + value.substring(selectionEnd);
+      textarea.value = newValue;
+      textarea.selectionStart = textarea.selectionEnd = selectionStart + 1;
+		}
+		// console.log("Hello");
+	}
+
 </script>
 
 <svelte:head>
@@ -14,14 +38,16 @@
 		Github esque progress bar
 	</h1>
 	<div class="github-tracking">
-		he
+		TODO
 	</div>
 
 	<h1>
 		Notes app
 	</h1>
-
-	<input type="text" name="myInput">
+	<p>{TodoText}</p>
+	<!-- <input type="text" class="TodoInput" name="myInput" on:input={handleTodoInput} > -->
+	<textarea name="" class="TodoInput" cols="30" rows="10" on:keydown={onKeyDown}></textarea>
+	<button on:click={saveTodo} >save</button>
 
 
 
@@ -31,6 +57,11 @@
 </section>
 
 <style>
+	.TodoInput {
+		height: 100vh;
+		width: 50vh;
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
