@@ -9,7 +9,7 @@ https://www.youtube.com/watch?v=3MCpUaboF18
 
 [x] textarea how to setup tab shortcuts (kinda frustrating)
 
-
+highlight todo vscode extension
 
 [ ] textarea other shortcuts
 [ ] textarea design
