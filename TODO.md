@@ -10,6 +10,38 @@ https://www.youtube.com/watch?v=3MCpUaboF18
 [x] textarea how to setup tab shortcuts (kinda frustrating)
 
 highlight todo vscode extension
+----------------April 16, Night cram------------------
+Good progress, a lot of things happened
+
+
+
+
+
+
+Next goals:
+hard to 
+[ ] basic backend
+  [ ] can store all of text area
+[ ] svelte store to handle global variables ???
+  [ ] save textarea to storage
+[ ] habits frontend
+  POST json file, which contains everything
+[ ] publish/use as app
+[ ] clickable todo 
+  fields
+  uuid, note, date created, 
+
+
+
+
+
+
+is todo tree memory intensive?
+
+
+
+
+
 
 [ ] textarea other shortcuts
 [ ] textarea design

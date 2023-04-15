@@ -1,8 +1,9 @@
 <script>
 
   function onKeyDown(e) {
-    // other shortcuts
+
     /*
+    [ ] other shortcuts
     [            -> add another one
   
 

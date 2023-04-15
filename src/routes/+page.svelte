@@ -2,7 +2,8 @@
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
-	import NoteInput from './../lib/components/NoteInput.svelte'
+	import HeatMap from '$lib/components/HeatMap.svelte'
+	import NoteInput from '$lib/components/NoteInput.svelte'
 	let TodoText = "yellow"
 
 
@@ -24,11 +25,8 @@
 	<h1>
 		Github esque progress bar
 	</h1>
-	<div class="github-tracking">
-		Github heatmap here
+	<HeatMap />
 
-		
-	</div>
 
 	<h1>
 		Clickable Habits here
