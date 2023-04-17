@@ -14,16 +14,18 @@ highlight todo vscode extension
 Good progress, a lot of things happened
 
 
-
-
+testing push behavior
 
 
 Next goals:
 hard to 
-[ ] basic backend
-  [ ] can store all of text area
 [ ] svelte store to handle global variables ???
   [ ] save textarea to storage
+  [ ] on render -> get value from sveltestore
+
+[ ] basic backend  (json server? or similar?)
+  [ ] can store all of text area
+  [ ] code sends to backend, axios + cors stuf
 [ ] habits frontend
   POST json file, which contains everything
 [ ] publish/use as app
@@ -36,7 +38,7 @@ hard to
 
 
 
-is todo tree memory intensive?
+[ ] is todo tree memory intensive?
 
 
 
@@ -56,7 +58,6 @@ is todo tree memory intensive?
 [ ] input, how to set to variable
 
 
-[ ] offline storage (for notes)
 
 [ ] json server
 
