@@ -54,12 +54,29 @@ const GridSquare: React.FC<GridSquareProps> = ({ value, onChange, isEditing, onF
   );
 };
 
-const EditableGrid = () => {
+const EditableGrid = ({
+  timeStart = 9,
+  timeEnd = 18,
+  columns = 2
+}: {
+  timeStart?: number;
+  timeEnd?: number;
+  columns?: number
+}) => {
+  // Calculate number of rows based on time range
+  const rows = timeEnd - timeStart;
+
   const [gridData, setGridData] = useState<string[][]>(() => {
-    const initialGrid = Array(5).fill(null).map(() => Array(5).fill(''));
+    const initialGrid = Array(rows).fill(null).map(() => Array(columns).fill(''));
     return initialGrid;
   });
   const [editingCell, setEditingCell] = useState<{ row: number; col: number } | null>(null);
+
+  // Generate time labels for each row
+  const timeLabels = Array.from({ length: rows }, (_, i) => {
+    const hour = timeStart + i;
+    return `${hour.toString().padStart(2, '0')}:00`;
+  });
 
   const handleCellClick = (row: number, col: number) => {
     setEditingCell({ row, col });
@@ -106,32 +123,38 @@ const EditableGrid = () => {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Editable Grid</h1>
       <div
-        className="grid gap-1"
-        style={{
-          gridTemplateColumns: `repeat(${gridData[0].length}, 50px)`, // Fixed size for squares
-          gridTemplateRows: `repeat(${gridData.length}, 50px)`,
-        }}
+        className="flex flex-col gap-1"
         onKeyDown={(e) => {
           if (editingCell) {
             handleKeyDown(e, editingCell.row, editingCell.col)
           }
         }}
       >
-        {gridData.map((row, rowIndex) =>
-          row.map((cell, colIndex) => (
-            <GridSquare
-              key={`${rowIndex}-${colIndex}`}
-              value={cell}
-              onChange={(newValue) => handleCellChange(rowIndex, colIndex, newValue)}
-              isEditing={editingCell?.row === rowIndex && editingCell?.col === colIndex}
-              onFocus={() => handleCellClick(rowIndex, colIndex)}
-              onBlur={handleCellBlur}
-            />
-          ))
-        )}
+        {gridData.map((row, rowIndex) => (
+          <div key={`row-${rowIndex}`} className="flex gap-1">
+            {/* Time label */}
+            <div className="w-16 h-[50px] flex items-center justify-end pr-2 text-sm text-gray-500">
+              {timeLabels[rowIndex]}
+            </div>
+            {/* Grid cells for this row */}
+            <div className="flex gap-1">
+              {row.map((cell, colIndex) => (
+                <div key={`${rowIndex}-${colIndex}`} className="w-[150px]">
+                  <GridSquare
+                    value={cell}
+                    onChange={(newValue) => handleCellChange(rowIndex, colIndex, newValue)}
+                    isEditing={editingCell?.row === rowIndex && editingCell?.col === colIndex}
+                    onFocus={() => handleCellClick(rowIndex, colIndex)}
+                    onBlur={handleCellBlur}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
       <p className="mt-4 text-sm text-gray-500">
-        Click on a square to edit.  Use arrow keys to navigate.
+        Click on a square to edit. Use arrow keys to navigate.
       </p>
     </div>
   );
