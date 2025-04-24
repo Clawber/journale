@@ -110,12 +110,34 @@ const EditableGrid = ({
       e.preventDefault();
       if (col > 0) {
         setEditingCell({ row, col: col - 1 });
+      } else if (row > 0) {
+        // Move to the rightmost cell of the previous row
+        setEditingCell({ row: row - 1, col: gridData[row - 1].length - 1 });
       }
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
       if (col < gridData[row].length - 1) {
-        setEditingCell({ row, col: col + 1 })
+        setEditingCell({ row, col: col + 1 });
+      } else if (row < gridData.length - 1) {
+        // Move to the first cell of the next row
+        setEditingCell({ row: row + 1, col: 0 });
       }
+    } else if (e.key === 'c' && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      const cellContent = gridData[row][col];
+      if (cellContent) {
+        navigator.clipboard.writeText(cellContent)
+          .then(() => {
+            // Optional: Add visual feedback that content was copied
+            console.log('Content copied to clipboard');
+          })
+          .catch(err => {
+            console.error('Failed to copy content: ', err);
+          });
+      }
+    } else if (e.key === 'Delete' || e.key === 'Backspace') {
+      e.preventDefault();
+      handleCellChange(row, col, '');
     }
   }
 
